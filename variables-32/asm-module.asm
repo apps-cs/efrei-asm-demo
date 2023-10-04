@@ -1,0 +1,88 @@
+#***************************************************************************
+#
+# Program for education in subject "APPS" for EFREI
+# petr.olivka@vsb.cz, Department of Computer Science, VSB-TUO
+#
+# Usage of variables in Assembly language
+#
+#***************************************************************************
+
+    .intel_syntax noprefix
+
+    .data
+
+    # list of public variables
+    .global g_a_first_last, g_a_4chars, g_a_byte_int, g_a_int, g_hoj
+
+g_a_first_last: .int    0,0                 # int[ 2 ]
+g_a_4chars:     .byte   0,0,0,0,0           # char[ 5 ]
+g_a_byte_int:   .int    0                   # int
+g_a_int:        .int    0                   # int
+g_hoj:          .asciz  "hoj\n",
+
+
+#***************************************************************************
+
+    .text
+
+#***************************************************************************
+    # Function shows int variables using.
+
+    .global  access_int
+access_int:
+    # Content of variable g_c_int will be moved to variable g_a_int.
+    mov eax, [ g_c_int ]
+    mov [ g_a_int ], eax
+    ret
+
+#***************************************************************************
+    # Function shows char and int variable using.
+
+    .global access_char
+access_char:
+    # Content of variable g_c_byte will be moved to variable g_a_byte_int.
+    # Both variable have different size and therefore is necessary
+    # to fill missing part by zeroes.
+    mov eax, 0
+    mov al, [ g_c_byte ]
+    mov [ g_a_byte_int ], eax
+    ret
+
+#***************************************************************************
+    # Functions shows array element access
+
+    .global access_array
+access_array:
+    # Function move content of first and last members of g_c_array
+    # to two elements array g_a_first_last.
+    # Length of array is stored in g_c_array_length
+    mov eax, [ g_c_array + 0 ]
+    mov [ g_a_first_last + 0 ], eax
+
+    mov ecx, [ g_c_array_length ]   # length of array
+    mov eax, [ g_c_array + ( ecx - 1 ) * 4 ] 
+    mov [ g_a_first_last + 1 * 4 ], eax
+    ret
+
+#***************************************************************************
+    # Function shows access to characters in string.
+
+    .global access_string
+access_string:
+    # Function rewrites first word in string g_c_hello
+    # and moves content of variable g_c_4chars to strin_4chars. 
+    mov [ g_c_hello + 0 ], byte ptr 'N'
+    mov [ g_c_hello + 1 ], byte ptr 'i'
+    mov [ g_c_hello + 2 ], byte ptr 'c'
+    mov [ g_c_hello + 3 ], byte ptr 'e'
+
+    mov al, [ g_c_4chars + 0 ]
+    mov [ g_a_4chars + 0 ], al
+    mov al, [ g_c_4chars + 1 ]
+    mov [ g_a_4chars + 1 ], al
+    mov al, [ g_c_4chars + 2 ]
+    mov [ g_a_4chars + 2 ], al
+    mov al, [ g_c_4chars + 3 ]
+    mov [ g_a_4chars + 3 ], al
+    ret
+

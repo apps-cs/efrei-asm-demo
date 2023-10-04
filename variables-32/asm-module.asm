@@ -12,14 +12,12 @@
     .data
 
     # list of public variables
-    .global g_a_first_last, g_a_4chars, g_a_byte_int, g_a_int, g_hoj
+    .global g_a_first_last, g_a_4chars, g_a_byte_int, g_a_int
 
 g_a_first_last: .int    0,0                 # int[ 2 ]
 g_a_4chars:     .byte   0,0,0,0,0           # char[ 5 ]
 g_a_byte_int:   .int    0                   # int
 g_a_int:        .int    0                   # int
-g_hoj:          .asciz  "hoj\n",
-
 
 #***************************************************************************
 

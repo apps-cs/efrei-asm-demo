@@ -24,7 +24,6 @@ extern int g_a_int;
 extern int g_a_first_last[];
 extern int g_a_byte_int;
 extern char g_a_4chars[];
-extern char g_hoj[];
 
 // external function
 void access_int();
@@ -34,7 +33,6 @@ void access_string();
 
 int main()
 {
-    printf( "%s\n", g_hoj );
     access_int();
     printf( "Variables g_c_int=%d, g_a_int=%d\n", g_c_int, g_a_int );
 
